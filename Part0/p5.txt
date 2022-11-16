@@ -1,0 +1,16 @@
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+server->browser: HTML code
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server->browser: CSS code
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+server->browser: JavaScript code
+note over browser:
+browser runs js code, which requests data.json
+end note
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server->browser: [{content: "Heyyyaaaaa", date: "2022-11-15T23:41:40.437Z"},…]
+note over browser:
+handles the response, displaying all notes
+end note
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/favicon.ico
+server->browser: favicon image
