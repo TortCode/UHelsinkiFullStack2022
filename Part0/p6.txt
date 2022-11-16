@@ -1,0 +1,6 @@
+note over browser:
+adds new note to list
+redraws notes
+end note
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa {content: "fafsa", date: "2022-11-16T04:06:07.109Z"}
+server->browser: {message: "note created"}
