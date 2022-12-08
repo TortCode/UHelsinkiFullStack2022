@@ -19,6 +19,8 @@ const Stats = ({data}) => (
     <Display name='good' value={data.good}/>
     <Display name='neutral' value={data.neutral}/>
     <Display name='bad' value={data.bad}/>
+    <Display name='average' value={data.avg}/>
+    <Display name='positive' value={data.pos_percent+'%'}/>
   </div>
 )
 
@@ -31,10 +33,14 @@ const App = () => {
   const neutralClick = () => setNeutral(neutral+1);
   const badClick = () => setBad(bad+1);
 
+  const reviews = good + neutral + bad
+  const avg = (good - bad) / reviews
+  const pos_percent = good * 100 / reviews
+
   return (
     <div>
       <Feedback handlers={{good:goodClick,neutral:neutralClick,bad:badClick}}/>
-      <Stats data={{ good,neutral,bad }}/>
+      <Stats data={{ good,neutral,bad,avg,pos_percent }}/>
     </div>
   );
 }
