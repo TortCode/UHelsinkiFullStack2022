@@ -11,18 +11,34 @@ const Feedback = ({handlers}) => (
   </div>
 )
 
-const Display = ({name, value}) => (<p>{name} {value}</p>)
+const StatisticsLine = ({name, value}) => (<tr><td>{name}</td><td>{value}</td></tr>)
 
-const Stats = ({data}) => (
-  <div>
-    <h1>statistics</h1>
-    <Display name='good' value={data.good}/>
-    <Display name='neutral' value={data.neutral}/>
-    <Display name='bad' value={data.bad}/>
-    <Display name='average' value={data.avg}/>
-    <Display name='positive' value={data.pos_percent+'%'}/>
-  </div>
-)
+const Stats = ({data}) => { 
+  const num = data.good + data.neutral + data.bad;
+  if (num === 0){
+    return (
+      <div>
+        <h1>statistics</h1>
+        <p>No feedback given</p>
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        <h1>statistics</h1>
+        <table>
+          <tbody>
+            <StatisticsLine name='good' value={data.good}/>
+            <StatisticsLine name='neutral' value={data.neutral}/>
+            <StatisticsLine name='bad' value={data.bad}/>
+            <StatisticsLine name='average' value={data.avg}/>
+            <StatisticsLine name='positive' value={data.pos_percent+'%'}/>
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+}
 
 const App = () => {
   const [good, setGood] = useState(0);
