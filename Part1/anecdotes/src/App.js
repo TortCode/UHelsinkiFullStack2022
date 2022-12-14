@@ -40,6 +40,7 @@ const App = () => {
     else
       return acc
   }, {max:0,idx:0}).idx
+
   return (
     <div>
       <h1>Anecdote of the day</h1>
