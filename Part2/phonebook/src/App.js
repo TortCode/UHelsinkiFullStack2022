@@ -2,6 +2,24 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import requests from './services/reqs'
 
+const Notification = ({isErr, message}) => {
+  if (message === null)
+    return null
+
+  let className = ''
+  if (isErr) {
+    className = 'error'
+  } else {
+    className = 'success'
+  }
+
+  return (
+    <div className={className}>
+      {message}
+    </div>
+  )
+}
+
 const SearchFilter = ({filterStr, handler}) =>
   <div>
     filter shown with <input value={filterStr} onChange={handler} />
@@ -37,6 +55,8 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filterStr, setFilterStr] = useState('')
+  const [isErr, setIsErr] = useState(false)
+  const [notifMessage, setNotifMessage] = useState(null)
 
 
   useEffect(() => {
@@ -53,24 +73,45 @@ const App = () => {
 
   const hFilterChange = (event) => { setFilterStr(event.target.value.toLowerCase()) }
 
+  const deletePersonLocally = id => {
+    setPersons(persons.filter(p => p.id !== id))
+  }
+
   const addPerson = (event) => {
     event.preventDefault()
 
     const newPerson = { name: newName.trim(), number: newNumber.trim() }
 
+    const showSuccessMessage = (msg) => {
+      setIsErr(false)
+      setNotifMessage(msg)
+      setTimeout(() => setNotifMessage(null), 5000)
+    }
+
+    const resetFields = () => {
+      setNewName('')
+      setNewNumber('')
+    }
+
     if (persons.some(p => p.name === newPerson.name)) {
       if (window.confirm(
         `${newPerson.name} is already in the phonebook, replace with new number?`)) {
 
-        const match = persons.findIndex(p => p.name === newPerson.name)
+        const match = persons.find(p => p.name === newPerson.name)
         requests
-          .update(persons[match].id, newPerson)
+          .update(match.id, newPerson)
           .then(returnPerson => {
-            const newPersons = [...persons]
-            newPersons[match] = returnPerson
+            const newPersons = persons.map(p => 
+              (p.id === returnPerson.id) ? returnPerson : p)
             setPersons(newPersons)
-            setNewName('')
-            setNewNumber('')
+            resetFields()
+            showSuccessMessage(`Changed number of ${returnPerson.name}`)
+          })
+          .catch(error => {
+            setIsErr(true)
+            setNotifMessage(`Information of ${newPerson.name} is already removed from server`)
+            deletePersonLocally(match.id) 
+            setTimeout(() => {setNotifMessage(null)}, 5000)
           })
       }
     } else {
@@ -78,20 +119,21 @@ const App = () => {
         .create(newPerson)
         .then(returnPerson => {
           setPersons(persons.concat(returnPerson))
-          setNewName('')
-          setNewNumber('')
+          resetFields()
+          showSuccessMessage(`Added ${returnPerson.name}`)
       })
     }
 
 
   }
 
+
   const deletePerson = p => {
     if (window.confirm(`Are you sure you want to delete ${p.name}`))
       requests
         .destroy(p.id)
         .then(() => {
-          setPersons(persons.filter(q => q.id !== p.id))
+          deletePersonLocally(p.id)
         })
   }
 
@@ -103,6 +145,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification isErr={isErr} message={notifMessage}/>
       <SearchFilter filterStr={filterStr} handler={hFilterChange} />
       <h2>add a new</h2>
       <PersonForm data={{addPerson, newName, hNameChange, newNumber, hNumberChange}} />
