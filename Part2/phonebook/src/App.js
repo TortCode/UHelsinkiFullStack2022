@@ -60,7 +60,7 @@ const App = () => {
 
 
   useEffect(() => {
-    const url = 'http://localhost:3001/persons'
+    const url = '/api/persons'
     requests.setBaseUrl(url)
     requests
       .getAll()
