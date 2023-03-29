@@ -1,7 +1,6 @@
 const Blog = require('../models/blog');
 const supertest = require('supertest');
 const app = require('../app');
-const { init } = require('../app');
 const api = supertest(app);
 const helper = require('./helper');
 
@@ -66,7 +65,7 @@ test('HTTP POST increases the number of blogs by one', async () => {
         likes: 50
     }; 
 
-    await api.post('/api/blogs').send(blog);
+    await api.post('/api/blogs').send(blog).expect(201).expect('Content-Type', /application\/json/);
     const blog_results = await api.get('/api/blogs');
     expect(blog_results.body.map(b => b.title)).toContain(blog.title);
 })
@@ -79,7 +78,8 @@ test('HTTP POST without likes value defaults to 0', async () => {
         url: "fbdsg.werdd.edu",
     };
 
-    const response = await api.post('/api/blogs').send(blog);
+    const response = await api.post('/api/blogs').send(blog).expect('Content-Type', /application\/json/);
+
     expect(response.body.likes).toBe(0);
 })
 
@@ -123,7 +123,12 @@ test('HTTP DELETE fails and returns 404 for nonexistent id', async () => {
 test('HTTP PUT succeeds with code 200 for valid id and data', async () => {
     const startBlogs = await helper.getAllBlogs();
     const newFirstBlog = {...startBlogs[0], likes: 1729 };
-    await api.put(`/api/blogs/${startBlogs[0].id}`).send(newFirstBlog).expect(200);
+    await api
+    .put(`/api/blogs/${startBlogs[0].id}`)
+    .send(newFirstBlog)
+    .expect(200)
+    .expect('Content-Type', /application\/json/);
+
     const endBlogs = await helper.getAllBlogs();
     expect(endBlogs).toHaveLength(startBlogs.length);
     expect(endBlogs[0].likes).toBe(1729);

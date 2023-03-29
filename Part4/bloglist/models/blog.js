@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const config = require('../utils/config');
 
 const blogSchema = new mongoose.Schema({
   title: {
@@ -15,18 +14,20 @@ const blogSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 })
 
 blogSchema.set('toJSON', {
-    transform: (doc, obj) => {
-        obj.id = obj._id.toString();
-        delete obj._id;
-        delete obj.__v;
-    }
+  transform: (doc, obj) => {
+    obj.id = obj._id.toString();
+    delete obj._id;
+    delete obj.__v;
+  }
 })
 
 const Blog = mongoose.model('Blog', blogSchema)
-
-mongoose.connect(config.MONGODB_URI)
 
 module.exports = Blog
