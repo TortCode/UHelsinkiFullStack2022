@@ -7,12 +7,21 @@ router.get('/', async (request, response) => {
   response.json(res);
 })
 
-router.post('/', async (request, response, next) => {
+router.post('/', async (request, response) => {
   const body = request.body;
-  const { title, author, likes } = body;
-  const user = await User.findById(body.userId);
+  if (!request.user || !request.user.id) {
+    response.status(401).json({ error: "Token invalid" });
+    return;
+  }
 
-  const blog = new Blog({ title, author, likes, user: user.id })
+  const { title, author, likes, url } = body;
+  const user = await User.findById(request.user.id);
+  if (!user) {
+    response.status(400).json({ error: "User invalid" });
+    return;
+  }
+
+  const blog = new Blog({ title, author, likes, url, user: user._id })
 
   const result = await blog.save();
   user.blogs = user.blogs.concat(result._id)
@@ -21,9 +30,14 @@ router.post('/', async (request, response, next) => {
   response.status(201).json(result);
 })
 
-router.delete('/:id', async (request, response, next) => {
+router.delete('/:id', async (request, response) => {
+  if (!request.user.id) {
+    response.status(401).json({ error: "Token invalid" });
+    return;
+  }
+
   const id = request.params.id;
-  const res = await Blog.findByIdAndDelete(id);
+  const res = await Blog.findOneAndDelete({ _id: id, user: request.user.id });
   if (res === null) {
     response.status(404).end();
     return;
@@ -31,7 +45,12 @@ router.delete('/:id', async (request, response, next) => {
   response.status(204).end();
 })
 
-router.put('/:id', async (request, response, next) => {
+router.put('/:id', async (request, response) => {
+  if (!request.user.id) {
+    response.status(401).json({ error: "Token invalid" });
+    return;
+  }
+
   const id = request.params.id;
   const { body } = request;
   const { title, url, author, likes } = body;
@@ -42,7 +61,7 @@ router.put('/:id', async (request, response, next) => {
     runValidators: true,
     new: true,
   };
-  const newBlog = await Blog.findByIdAndUpdate(id, blog, opts);
+  const newBlog = await Blog.findOneAndUpdate({ _id: id, user: request.user.id }, blog, opts);
   if (newBlog === null) {
     response.status(404).end();
     return;

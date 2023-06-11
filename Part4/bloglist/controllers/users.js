@@ -3,8 +3,8 @@ const router = require('express').Router();
 const User = require('../models/user');
 
 router.post('/', async (request, response) => {
-    const { username, name, password } = request.body;
-    console.log(request.body);
+    const body = request.body;
+    const { username, name, password } = body;
 
     if (!password || password.length < 3) {
         response.status(400).json({ error: "Password of at least 3 characters must be given" })
@@ -26,7 +26,7 @@ router.post('/', async (request, response) => {
 })
 
 router.get('/', async (request, response) => {
-    const users = User.find({}).populate('blogs', { title: 1, author: 1, url: 1 });
+    const users = await User.find({}).populate('blogs', { title: 1, author: 1, url: 1 });
     response.json(users);
 })
 
