@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import loginService from '../services/login';
 
-const LoginForm = ({ setUser }) => {
+const LoginForm = ({ setUser, setMessage, setIsError }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -14,8 +14,19 @@ const LoginForm = ({ setUser }) => {
       setUser(user);
       setUsername('');
       setPassword('');
-    } catch (exception) {
 
+      setIsError(false);
+      setMessage(`Welcome ${user.name ?? user.username}!`);
+      setTimeout(() => {
+        setMessage(null);
+      }, 5000);
+    } catch (error) {
+      setIsError(true);
+      setMessage(error.response.data.error);
+      setTimeout(() => {
+        setMessage(null);
+        setIsError(false);
+      }, 5000);
     }
   }
 
@@ -33,7 +44,7 @@ const LoginForm = ({ setUser }) => {
           />
         </div>
         <div>
-          input for password
+          password
           <input
             type="password"
             name="password"

@@ -3,19 +3,15 @@ import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import LoginForm from './components/LoginForm'
 import NewBlogForm from './components/NewBlogForm'
+import Notification from './components/Notification'
 
 import blogService from './services/blogs'
-import loginService from './services/login'
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )  
-  }, [])
+  const [message, setMessage] = useState(null);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser');
@@ -26,13 +22,19 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    if (user !== null) {
-      window.localStorage.setItem(
-        'loggedBlogappUser',
-        JSON.stringify(user)
-      );
-      blogService.setToken(user.token);
-    }
+    (async () => {
+      if (user !== null) {
+        window.localStorage.setItem(
+          'loggedBlogappUser',
+          JSON.stringify(user)
+        );
+        blogService.setToken(user.token);
+        
+        // update blogs
+        const blogs = await blogService.getAll();
+        setBlogs(blogs.filter(blog => blog.user.username === user.username));
+      }
+    })();
   }, [user])
 
   const addBlogLocally = (blog) => {
@@ -47,22 +49,26 @@ const App = () => {
 
   if (user === null) {
     return (
-      <LoginForm setUser={setUser} />
+      <>
+        <Notification message={message} isError={isError} />
+        <LoginForm setUser={setUser} setMessage={setMessage} setIsError={setIsError}/>
+      </>
     )
   } 
 
   return (
-    <div>
+    <>
       <h2>blogs</h2>
+      <Notification message={message} isError={isError} />
       <div>
-        {user.name} logged in
+        {user.name ?? user.username} logged in
         <button type="button" onClick={handleLogout}>logout</button>
       </div>
-      <NewBlogForm addBlog={addBlogLocally} />
+      <NewBlogForm addBlog={addBlogLocally} setMessage={setMessage} setIsError={setIsError}/>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
-    </div>
+    </>
   )
 }
 
