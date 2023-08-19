@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import blogService from '../services/blogs';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-const NewBlogForm = ({ addBlog, setMessage, setIsError }) => {
+function NewBlogForm({ createBlog }) {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [url, setUrl] = useState('');
@@ -9,24 +9,11 @@ const NewBlogForm = ({ addBlog, setMessage, setIsError }) => {
   const handleCreateBlog = async (event) => {
     event.preventDefault();
 
-    try {
-      const blog = await blogService.create({ title, author, url });
-      addBlog(blog);
+    const success = await createBlog({ title, author, url });
+    if (success) {
       setTitle('');
       setAuthor('');
       setUrl('');
-
-      setIsError(false);
-      setMessage(`a new blog ${blog.title} by ${blog.author} added`);
-      setTimeout(() => {
-        setMessage(null);
-      }, 5000)
-    } catch (error) {
-      setIsError(true);
-      setMessage(error.response.data.error);
-      setTimeout(() => {
-        setMessage(null);
-      }, 5000);
     }
   };
 
@@ -64,7 +51,11 @@ const NewBlogForm = ({ addBlog, setMessage, setIsError }) => {
         <button type="submit">create</button>
       </form>
     </>
-  )
+  );
 }
+
+NewBlogForm.propTypes = {
+  createBlog: PropTypes.func.isRequired,
+};
 
 export default NewBlogForm;

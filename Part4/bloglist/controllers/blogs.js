@@ -23,7 +23,8 @@ router.post('/', async (request, response) => {
 
   const blog = new Blog({ title, author, likes, url, user: user._id })
 
-  const result = await blog.save();
+  const result = await (await blog.save())
+    .populate('user', { username: 1, name: 1});
   user.blogs = user.blogs.concat(result._id)
   await user.save();
 
@@ -61,7 +62,11 @@ router.put('/:id', async (request, response) => {
     runValidators: true,
     new: true,
   };
-  const newBlog = await Blog.findOneAndUpdate({ _id: id, user: request.user.id }, blog, opts);
+
+  const newBlog = await Blog
+    .findOneAndUpdate({ _id: id, user: request.user.id }, blog, opts)
+    .populate('user', { username: 1, name: 1});
+
   if (newBlog === null) {
     response.status(404).end();
     return;

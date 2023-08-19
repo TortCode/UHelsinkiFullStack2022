@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import loginService from '../services/login';
 
-const LoginForm = ({ setUser, setMessage, setIsError }) => {
+function LoginForm({ setUser, setMessage, setIsError }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -28,7 +29,7 @@ const LoginForm = ({ setUser, setMessage, setIsError }) => {
         setIsError(false);
       }, 5000);
     }
-  }
+  };
 
   return (
     <div>
@@ -55,7 +56,13 @@ const LoginForm = ({ setUser, setMessage, setIsError }) => {
         <button type="submit">login</button>
       </form>
     </div>
-  )
+  );
 }
+
+LoginForm.propTypes = {
+  setUser: PropTypes.func.isRequired,
+  setMessage: PropTypes.func.isRequired,
+  setIsError: PropTypes.func.isRequired,
+};
 
 export default LoginForm;
