@@ -37,7 +37,7 @@ function Blog({
 
   return (
     <div style={blogStyle}>
-      <div>
+      <div className="default-blog">
         {blog.title}
         {' '}
         {blog.author}
