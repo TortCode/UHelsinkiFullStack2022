@@ -23,6 +23,7 @@ const errorHandler = (error, request, response, next) => {
 
 const userExtractor = (request, response, next) => {
   const token = request.token;
+  request.user = null;
   if (token) {
     const decodedToken = jwt.verify(token, process.env.SECRET);
     if (!decodedToken) {
@@ -33,4 +34,8 @@ const userExtractor = (request, response, next) => {
   next()
 };
 
-module.exports = { tokenExtractor, errorHandler, userExtractor };
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' });
+}
+
+module.exports = { tokenExtractor, errorHandler, userExtractor, unknownEndpoint };
