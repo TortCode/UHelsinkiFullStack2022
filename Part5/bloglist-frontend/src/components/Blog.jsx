@@ -52,11 +52,11 @@ function Blog({
             likes
             {' '}
             {blog.likes}
-            <button type="button" onClick={likeBlog}>like</button>
+            <button className="like-blog-button" type="button" onClick={likeBlog}>like</button>
           </div>
           <div>{blog.user.name}</div>
           {showRemove
-          && <button type="button" onClick={removeBlog}>remove</button>}
+          && <button className="remove-blog-button" type="button" onClick={removeBlog}>remove</button>}
         </>
       )}
     </div>

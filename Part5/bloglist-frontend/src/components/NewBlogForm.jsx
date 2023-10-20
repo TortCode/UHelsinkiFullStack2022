@@ -20,12 +20,13 @@ function NewBlogForm({ createBlog }) {
   return (
     <>
       <h2>create new</h2>
-      <form onSubmit={handleCreateBlog}>
+      <form onSubmit={handleCreateBlog} id="new-blog">
         <div>
           title:
           <input
             type="text"
             value={title}
+            id="title"
             name="title"
             onChange={({ target }) => setTitle(target.value)}
           />
@@ -35,6 +36,7 @@ function NewBlogForm({ createBlog }) {
           <input
             type="text"
             value={author}
+            id="author"
             name="author"
             onChange={({ target }) => setAuthor(target.value)}
           />
@@ -44,6 +46,7 @@ function NewBlogForm({ createBlog }) {
           <input
             type="text"
             value={url}
+            id="url"
             name="url"
             onChange={({ target }) => setUrl(target.value)}
           />

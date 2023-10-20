@@ -39,6 +39,7 @@ function LoginForm({ setUser, setMessage, setIsError }) {
           username
           <input
             type="text"
+            id="username"
             name="username"
             value={username}
             onChange={({ target }) => setUsername(target.value)}
@@ -48,12 +49,13 @@ function LoginForm({ setUser, setMessage, setIsError }) {
           password
           <input
             type="password"
+            id="password"
             name="password"
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button type="submit">login</button>
+        <button id="login-button" type="submit">login</button>
       </form>
     </div>
   );
