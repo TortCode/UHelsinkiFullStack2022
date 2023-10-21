@@ -64,7 +64,7 @@ describe('Blog app', function () {
     }
 
     function createBlog({ title, author, url }) {
-      cy.contains('new blog').click();
+      cy.get('button').contains('new blog').click();
       cy.get('#title').type(title);
       cy.get('#author').type(author);
       cy.get('#url').type(url);
@@ -90,6 +90,14 @@ describe('Blog app', function () {
       cy.contains('view').click();
       cy.contains('test url');
     });
+
+    function likeBlog(selector, count) {
+      cy.get(selector).contains('view').click();
+      for (let i = 0; i < count; i += 1) {
+        cy.get(selector).find('.like-blog-button').click();
+        cy.get(selector).contains(`likes ${i + 1}`);
+      }
+    }
 
     describe('After creating a blog', function () {
       beforeEach(function () {
@@ -141,6 +149,41 @@ describe('Blog app', function () {
         cy.contains('test other title').contains('view').click();
         cy.contains('test other title').parent().get('.remove-blog-button').should('not.exist');
       });
+    });
+    it.only('Blogs are ordered by likes', function () {
+      createBlog({
+        title: 'title 1',
+        author: 'author 1',
+        url: 'url 1',
+      });
+      createBlog({
+        title: 'title 2',
+        author: 'author 2',
+        url: 'url 2',
+      });
+      createBlog({
+        title: 'title 3',
+        author: 'author 3',
+        url: 'url 3',
+      });
+      createBlog({
+        title: 'title 4',
+        author: 'author 4',
+        url: 'url 4',
+      });
+      cy.contains('title 1').parent().as('SelectedBlog');
+      likeBlog('@SelectedBlog', 4);
+      cy.contains('title 2').parent().as('SelectedBlog');
+      likeBlog('@SelectedBlog', 2);
+      cy.contains('title 3').parent().as('SelectedBlog');
+      likeBlog('@SelectedBlog', 1);
+      cy.contains('title 4').parent().as('SelectedBlog');
+      likeBlog('@SelectedBlog', 3);
+
+      cy.get('.blog').eq(0).contains('title 1');
+      cy.get('.blog').eq(1).contains('title 4');
+      cy.get('.blog').eq(2).contains('title 2');
+      cy.get('.blog').eq(3).contains('title 3');
     });
   });
 });
