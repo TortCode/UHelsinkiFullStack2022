@@ -13,4 +13,9 @@ const createNew = async (content) => {
     return response.data;
 }
 
-export default { getAll, createNew };
+const updateById = async (id, updates) => {
+    const response = await axios.patch(`${baseUrl}/${id}`, updates);
+    return response.data;
+}
+
+export default { getAll, createNew, updateById };
