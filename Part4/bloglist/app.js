@@ -13,6 +13,7 @@ const blogsRouter = require('./controllers/blogs');
 const usersRouter = require('./controllers/users');
 const loginRouter = require('./controllers/login');
 
+mongoose.set('strictQuery', true);
 mongoose.connect(config.MONGODB_URI)
   .then(() => {
     logger.info("Connected to MongoDB");
