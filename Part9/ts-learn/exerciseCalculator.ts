@@ -1,3 +1,5 @@
+import { parseNumber } from "./utils";
+
 interface ExerciseResult {
   periodLength: number;
   trainingDays: number;
@@ -8,8 +10,7 @@ interface ExerciseResult {
   average: number;
 }
 
-
-function calculateExercises(hours: number[], target: number): ExerciseResult {
+export const calculateExercises = (hours: number[], target: number): ExerciseResult => {
   const periodLength = hours.length;
   const trainingDays = hours.filter(h => h > 0).length;
   const average = hours.reduce((a, b) => a + b, 0) / periodLength;
@@ -26,6 +27,35 @@ function calculateExercises(hours: number[], target: number): ExerciseResult {
     target,
     average,
   };
+};
+
+interface ExerciseArguments {
+  target: number;
+  hours: number[];
 }
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
+const parseArgs = (args: string[]): ExerciseArguments => {
+  if (args.length < 4) throw new Error('Not enough arguments');
+
+  const target = parseNumber(args[2]);
+
+  args = args.slice(3);
+  const hours = args.map(parseNumber);
+
+  return {
+    target,
+    hours,
+  };
+};
+
+// only run if script
+if (require.main === module) {
+  try {
+    const { target, hours } = parseArgs(process.argv);
+    console.log(calculateExercises(hours, target));
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      console.log('Error:', e.message);
+    }
+  }
+}
