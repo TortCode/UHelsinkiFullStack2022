@@ -25,6 +25,8 @@ const AddPatientForm = ({ onCancel, onSubmit }: Props) => {
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [gender, setGender] = useState(Gender.Other);
 
+  console.log(Gender);
+
   const onGenderChange = (event: SelectChangeEvent<string>) => {
     event.preventDefault();
     if ( typeof event.target.value === "string") {

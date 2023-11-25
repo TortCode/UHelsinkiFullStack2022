@@ -1,129 +1,39 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-  BaseEntry,
-  Entry,
-  Gender,
-  HealthCheckEntry,
-  HospitalEntry,
-  OccupationalHealthcareEntry,
-  Patient,
-  assertNever,
-} from "../../types";
+import { useContext, useEffect, useState } from "react";
+import { EntryFormValues, Gender, Patient } from "../../types";
 import {
   Card,
-  List,
-  ListItem,
   Divider,
   Stack,
   Typography,
   CardContent,
+  Button,
 } from "@mui/material";
 import {
   Male as MaleIcon,
   Female as FemaleIcon,
   Transgender as TransgenderIcon,
-  LocalHospitalOutlined as HospitalIcon,
-  MonitorHeartOutlined as HealthCheckIcon,
-  WorkOutlineOutlined as OccupationalHealthcareIcon,
 } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import patientService from "../../services/patients";
-import DiagnosisContext from "../../DiagnosisContext";
-import HealthRatingBar from "../HealthRatingBar";
-
-const BaseEntryDetails: React.FC<{ entry: BaseEntry; icon: JSX.Element }> = ({
-  entry,
-  icon,
-}) => {
-  const diagnoses = useContext(DiagnosisContext);
-  return (
-    <>
-      <Typography >
-        {entry.date} {icon}
-      </Typography>
-      <Typography >
-        <em>{entry.description}</em>
-      </Typography>
-      {entry.specialist && (
-        <Typography >Diagnosed by {entry.specialist}</Typography>
-      )}
-      <List>
-        {entry.diagnosisCodes?.map((code) => (
-          <ListItem key={code}>
-            <Typography variant="body2">
-              {code} {diagnoses.find((d) => d.code === code)?.name}
-            </Typography>
-          </ListItem>
-        ))}
-      </List>
-    </>
-  );
-};
-
-const HealthCheckEntryDetails: React.FC<{ entry: HealthCheckEntry }> = ({
-  entry,
-}) => {
-  return (
-    <>
-      <BaseEntryDetails entry={entry} icon={<HealthCheckIcon />} />
-      <Divider sx={{ mt: ".5em", mb: ".5em" }} />
-      <Typography>
-        <HealthRatingBar rating={entry.healthCheckRating} showText={true} />
-      </Typography>
-    </>
-  );
-};
-const HospitalEntryDetails: React.FC<{ entry: HospitalEntry }> = ({
-  entry,
-}) => {
-  return (
-    <>
-      <BaseEntryDetails
-        entry={entry}
-        icon={<HospitalIcon fontSize="medium" />}
-      />
-      <Divider sx={{ mt: ".5em", mb: ".5em" }} />
-      <Typography >
-        Discharged on {entry.discharge.date} because {entry.discharge.criteria}
-      </Typography>
-    </>
-  );
-};
-const OccupationalHealthcareEntryDetails: React.FC<{
-  entry: OccupationalHealthcareEntry;
-}> = ({ entry }) => {
-  return (
-    <>
-      <BaseEntryDetails entry={entry} icon={<OccupationalHealthcareIcon />} />
-      <Divider sx={{ mt: ".5em", mb: ".5em" }} />
-      <Typography >Employed by {entry.employerName}</Typography>
-      {entry.sickLeave && (
-        <Typography >
-          Leave from {entry.sickLeave.startDate} to 
-          {entry.sickLeave.endDate}
-        </Typography>
-      )}
-    </>
-  );
-};
-
-const EntryDetails: React.FC<{ entry: Entry }> = ({ entry }) => {
-  switch (entry.type) {
-    case "HealthCheck":
-      return <HealthCheckEntryDetails entry={entry} />;
-    case "Hospital":
-      return <HospitalEntryDetails entry={entry} />;
-    case "OccupationalHealthcare":
-      return <OccupationalHealthcareEntryDetails entry={entry} />;
-    default:
-      return assertNever(entry);
-  }
-};
+import EntryDetails from "./EntryDetails";
+import AddEntryModal from "../AddEntryModel";
+import PatientsContext from "../../PatientsContext";
 
 const SinglePatientPage = () => {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [error, setError] = useState<string>();
+
+  const openModal = (): void => setModalOpen(true);
+
+  const closeModal = (): void => {
+    setModalOpen(false);
+    setError(undefined);
+  };
+
   const [patient, setPatient] = useState<Patient | undefined | null>(undefined);
+  const [patients, setPatients] = useContext(PatientsContext)!;
 
   const { id } = useParams<{ id: string }>();
 
@@ -148,6 +58,35 @@ const SinglePatientPage = () => {
     fetchPatient();
   }, [id]);
 
+  const submitNewEntry = async (values: EntryFormValues) => {
+    try {
+      if (!patient) {
+        throw new Error("Patient not found");
+      }
+      const entry = await patientService.createEntry(patient.id, values);
+      const newEntries = patient.entries.concat(entry);
+      const newPatient = { ...patient, entries: newEntries };
+      setPatient(newPatient);
+      setPatients(
+        patients.map((p) => (p.id === newPatient.id ? newPatient : p))
+      );
+      setModalOpen(false);
+    } catch (e: unknown) {
+      if (axios.isAxiosError(e)) {
+        if (e?.response?.data && typeof e?.response?.data === "string") {
+          const message = e.response.data;
+          console.error(message);
+          setError(message);
+        } else {
+          setError("Unrecognized axios error");
+        }
+      } else {
+        console.error("Unknown error", e);
+        setError("Unknown error");
+      }
+    }
+  };
+
   if (patient === undefined) {
     return <Typography variant="h3">Loading...</Typography>;
   }
@@ -168,17 +107,15 @@ const SinglePatientPage = () => {
   };
 
   return (
-    <div style={{ marginTop: "1em" }}>
+    <div style={{ marginTop: "1em", }}> 
       <Typography variant="h4">
         {patient.name} {getGenderIcon(patient.gender)}
       </Typography>
       {patient.dateOfBirth && (
-        <Typography >Born: {patient.dateOfBirth}</Typography>
+        <Typography>Born: {patient.dateOfBirth}</Typography>
       )}
-      {patient.ssn && (
-        <Typography >SSN: {patient.ssn}</Typography>
-      )}
-      <Typography >Occupation: {patient.occupation}</Typography>
+      {patient.ssn && <Typography>SSN: {patient.ssn}</Typography>}
+      <Typography>Occupation: {patient.occupation}</Typography>
       <Divider sx={{ mt: "1em", mb: "1em" }} />
       <Stack spacing={1}>
         {patient.entries.map((entry) => (
@@ -189,6 +126,15 @@ const SinglePatientPage = () => {
           </Card>
         ))}
       </Stack>
+      <AddEntryModal
+        modalOpen={modalOpen}
+        onSubmit={submitNewEntry}
+        error={error}
+        onClose={closeModal}
+      />
+      <Button variant="contained" onClick={() => openModal()} sx={{ mt: '1em'}}>
+        Add New Entry
+      </Button>
     </div>
   );
 };
