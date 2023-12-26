@@ -4,7 +4,9 @@ import { useState } from "react"
 
 
 const Authors = (props) => {
-  const result = useQuery(ALL_AUTHORS)
+  const result = useQuery(ALL_AUTHORS, {
+    fetchPolicy: 'cache-and-network',
+  })
   const [changeBirthyear] = useMutation(CHANGE_BIRTHYEAR, {
     refetchQueries: [{ query: ALL_AUTHORS }],
     onError: (error) => {

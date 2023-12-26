@@ -1,15 +1,44 @@
 import { useEffect, useState } from "react";
-import { useApolloClient } from "@apollo/client";
+import { useApolloClient, useSubscription } from "@apollo/client";
 import Authors from "./components/Authors";
 import Books from "./components/Books";
 import NewBook from "./components/NewBook";
 import LoginForm from "./components/LoginForm";
 import { Link, Routes, Route, Navigate } from "react-router-dom";
 import RecommendedBooks from "./components/RecommendedBooks";
+import { BOOKS_BY_GENRE, BOOK_ADDED } from "./queries";
+
+const uniqByTitle = (a) => {
+  let seen = new Set()
+  return a.filter((item) => {
+    let k = item.title
+    return seen.has(k) ? false : seen.add(k)
+  })
+}
 
 const App = () => {
   const [token, setToken] = useState(null);
   const client = useApolloClient();
+
+  useSubscription(BOOK_ADDED, {
+    onData: ({ data, client }) => {
+      const book = data.data.bookAdded;
+      window.alert(`New book added: ${book.title}`);
+      const genresToUpdate = [...book.genres, null]
+      genresToUpdate.forEach((genre) => {
+        client.cache.updateQuery({
+          query: BOOKS_BY_GENRE,
+          variables: { genre },
+        }, (value) => {
+          if (value) {
+            const allBooks = value.allBooks
+            return { allBooks: uniqByTitle(allBooks.concat(book)) }
+          }
+          return null
+        })
+      })
+    }
+  })
 
   useEffect(() => {
     const token = localStorage.getItem("library-user-token");

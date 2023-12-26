@@ -6,7 +6,7 @@ const Books = (props) => {
   const [genreList, setGenreList] = useState([]);
   const [genreFilter, setGenreFilter] = useState(null);
   const result = useQuery(BOOKS_BY_GENRE, {
-    fetchPolicy: "cache-and-network",
+    refetchPolicy: "cache-and-network",
     variables: { genre: genreFilter },
   });
 
