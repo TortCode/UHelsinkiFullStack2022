@@ -1,0 +1,84 @@
+Script started on 2024-07-27 17:13:27-05:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="146" LINES="35"]
+[0m[49m[39m[27m[24m[K
+[1A7[0m[49m[39m[0m[47m[38;5;232m [0m[38;5;232m[47m[47m[38;5;232m [0m[38;5;232m[47m[44m[37m[0m[37m[44m[44m[38;5;254m  [1m[38;5;254m[44m[38;5;255m~[0m[38;5;255m[44m[44m[38;5;254m/[38;5;250mp[0m[38;5;250m[44m[44m[38;5;254m/[1m[38;5;254m[44m[38;5;255mUHelsinkiFullStack2022[0m[38;5;255m[44m[44m[38;5;254m/Part12/[38;5;250mp[0m[38;5;250m[44m[44m[38;5;254m/[38;5;250mt[0m[38;5;250m[44m[44m[38;5;254m/[1m[38;5;254m[44m[38;5;255mtodo-backend[0m[38;5;255m[44m[44m[38;5;254m[0m[38;5;254m[44m[44m[38;5;254m [0m[38;5;254m[44m[49m[34m[0m[34m[49m[39m [0m[49m[39m                                                                    [0m[49m[30m[0m[30m[40m[32m [0m[32m[40m[40m[32m✔[0m[32m[40m[40m[32m [0m[32m[40m[40m[32m[37m[0m[37m[40m[47m[30m 17:13:27[0m[30m[47m[47m[30m [0m[30m[47m[47m[30m [0m[30m[47m[49m[39m[0m[49m[39m[27m[24m[60C[?2004h^[[A^[[A^[[A[?25l8[0m[49m[39m[27m[24m[J]2;teerth@teerthlaptop0:~/projects/UHelsinkiFullStack2022/Part12/part12-containers-applications/todo-app/todo-backend]1;../todo-backend]7;file://teerthlaptop0/home/teerth/projects/UHelsinkiFullStack2022/Part12/part12-containers-applications/todo-app/todo-backend\[0m[38;5;254m[49m[39m[27m[24m[1m[7m%[27m[1m[0m                                                                                                                                                 [0m[49m[39m[27m[24m[K[0m[27m[24m[J[0m[49m[39m[0m[47m[38;5;232m [0m[38;5;232m[47m[47m[38;5;232m [0m[38;5;232m[47m[44m[37m[0m[37m[44m[44m[38;5;254m  [1m[38;5;254m[44m[38;5;255m~[0m[38;5;255m[44m[44m[38;5;254m/[38;5;250mp[0m[38;5;250m[44m[44m[38;5;254m/[1m[38;5;254m[44m[38;5;255mUHelsinkiFullStack2022[0m[38;5;255m[44m[44m[38;5;254m/Part12/[38;5;250mp[0m[38;5;250m[44m[44m[38;5;254m/todo-app/[1m[38;5;254m[44m[38;5;255mtodo-backend[0m[38;5;255m[44m[44m[38;5;254m[0m[38;5;254m[44m[44m[38;5;254m [0m[38;5;254m[44m[42m[34m[0m[34m[42m[42m[30m  [30m main[0m[30m[42m[42m[30m [0m[30m[42m[49m[32m[0m[32m[49m[39m [0m[49m[39m[K[41C[0m[49m[30m[0m[30m[40m[32m [0m[32m[40m[40m[32m✔[0m[32m[40m[40m[32m [0m[32m[40m[40m[32m[34m[0m[34m[40m[44m[30m base[0m[30m[44m[44m[30m [0m[30m[44m[44m[30m [0m[30m[44m[44m[30m[37m[0m[37m[44m[47m[30m 17:13:27[0m[30m[47m[47m[30m [0m[30m[47m[47m[30m [0m[30m[47m[49m[39m[67D[?1h=[?25h[?2004hscript ../../script-answers/exercise12_8.txt[K[44Ddocker compose -f docker-compose.dev.yml up -ddown --volumes[14Dup -d         [9D[46Dscript ../../script-answers/exercise12_8.txt  [44D[K[41C[0m[49m[30m[0m[30m[40m[32m [0m[32m[40m[40m[32m✔[0m[32m[40m[40m[32m [0m[32m[40m[40m[32m[34m[0m[34m[40m[44m[30m base[0m[30m[44m[44m[30m [0m[30m[44m[44m[30m [0m[30m[44m[44m[30m[37m[0m[37m[44m[47m[30m 17:13:27[0m[30m[47m[47m[30m [0m[30m[47m[47m[30m [0m[30m[47m[49m[39m[67Dscript ../../script-answers/exercise12_8.txt[K[44D[K[41C[0m[49m[30m[0m[30m[40m[32m [0m[32m[40m[40m[32m✔[0m[32m[40m[40m[32m [0m[32m[40m[40m[32m[34m[0m[34m[40m[44m[30m base[0m[30m[44m[44m[30m [0m[30m[44m[44m[30m [0m[30m[44m[44m[30m[37m[0m[37m[44m[47m[30m 17:13:27[0m[30m[47m[47m[30m [0m[30m[47m[47m[30m [0m[30m[47m[49m[39m[67Dddocker ps[?1l>[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;5;76m❯[0m[38;5;76m[49m[39m[27m[24m docker ps[K[?25h
+]2;docker ps]1;dockerCONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS         PORTS                     NAMES
+b56d132ad68c   mongo     "docker-entrypoint.s…"   10 seconds ago   Up 9 seconds   0.0.0.0:3456->27017/tcp   todo-backend-mongo-1
+[1m[7m%[27m[1m[0m                                                                                                                                                  ]2;teerth@teerthlaptop0:~/projects/UHelsinkiFullStack2022/Part12/part12-containers-applications/todo-app/todo-backend]1;../todo-backend]7;file://teerthlaptop0/home/teerth/projects/UHelsinkiFullStack2022/Part12/part12-containers-applications/todo-app/todo-backend\[0m[27m[24m[J[0m[49m[39m[0m[47m[38;5;232m [0m[38;5;232m[47m[47m[38;5;232m [0m[38;5;232m[47m[44m[37m[0m[37m[44m[44m[38;5;254m  [1m[38;5;254m[44m[38;5;255m~[0m[38;5;255m[44m[44m[38;5;254m/[38;5;250mp[0m[38;5;250m[44m[44m[38;5;254m/[1m[38;5;254m[44m[38;5;255mUHelsinkiFullStack2022[0m[38;5;255m[44m[44m[38;5;254m/Part12/[38;5;250mp[0m[38;5;250m[44m[44m[38;5;254m/[38;5;250mt[0m[38;5;250m[44m[44m[38;5;254m/[1m[38;5;254m[44m[38;5;255mtodo-backend[0m[38;5;255m[44m[44m[38;5;254m[0m[38;5;254m[44m[44m[38;5;254m [0m[38;5;254m[44m[42m[34m[0m[34m[42m[42m[30m  [30m main[0m[30m[42m[42m[30m [0m[30m[42m[49m[32m[0m[32m[49m[39m [0m[49m[39m[K[48C[0m[49m[30m[0m[30m[40m[32m [0m[32m[40m[40m[32m✔[0m[32m[40m[40m[32m [0m[32m[40m[40m[32m[34m[0m[34m[40m[44m[30m base[0m[30m[44m[44m[30m [0m[30m[44m[44m[30m [0m[30m[44m[44m[30m[37m[0m[37m[44m[47m[30m 17:13:33[0m[30m[47m[47m[30m [0m[30m[47m[47m[30m [0m[30m[47m[49m[39m[74D[?1h=[?2004hdocker ps[9Dscript ../../script-answers/exercise12_8.txt[44Ddocker compose -f docker-compose.dev.yml up -ddown --volumes[K[48Dexec -it to[2C-backend-mongo-1 bash[K[7C[0m[49m[30m[0m[30m[40m[32m [0m[32m[40m[40m[32m✔[0m[32m[40m[40m[32m [0m[32m[40m[40m[32m[34m[0m[34m[40m[44m[30m base[0m[30m[44m[44m[30m [0m[30m[44m[44m[30m [0m[30m[44m[44m[30m[37m[0m[37m[44m[47m[30m 17:13:33[0m[30m[47m[47m[30m [0m[30m[47m[47m[30m [0m[30m[47m[49m[39m[33D[34Dps                                [32D[9Dscript ../../script-answers/exercise12_8.txt[44Ddocker ps                                   [35Dexec -it todo-backend-mongo-1 bash[?1l>[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;5;76m❯[0m[38;5;76m[49m[39m[27m[24m docker exec -it todo-backend-mongo-1 bash[K[?25h
+]2;docker exec -it todo-backend-mongo-1 bash]1;docker[?2004hroot@b56d132ad68c:/# mongosh -u root -p example
+[?2004l]0;mongosh mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000Current Mongosh Log ID:	66a5711afcff4dfa58149f47
+Connecting to:		[1m[32mmongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.10[0m
+Using MongoDB:		7.0.12
+[1m[33mUsing Mongosh[0m:		2.2.10
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+
+To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+You can opt-out by running the disableTelemetry() command.
+
+[1G[0J [1G[1m[33m------[0m
+   [1m[33mThe server generated these startup warnings when booting[0m
+   2024-07-27T22:13:27.946+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2024-07-27T22:13:28.904+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never' in this binary version
+   2024-07-27T22:13:28.904+00:00: vm.max_map_count is too low
+[1m[33m------[0m
+
+[1G[0Jtest> [7Gshow dbs
+[1madmin[0m         100.00 KiB
+[1mconfig[0m         12.00 KiB
+[1mlocal[0m          40.00 KiB
+[1mthe_database[0m   40.00 KiB
+[1G[0Jtest> [7Guse the_database
+switched to db the_database
+[1G[0Jthe_database> [15Gcho[1G[0Jthe_database> ch[17G[1G[0Jthe_database> c[16G[1G[0Jthe_database> [15Gshow collections
+[1mtodos[0m
+[1G[0Jthe_database> [15Gdb.todoes[1G[0Jthe_database> db.todoe[23G[1G[0Jthe_database> db.todo[22Gs.find({})
+[
+  {
+    _id: ObjectId([32m'66a57106f660a20b5a149f48'[39m),
+    text: [32m'Write code'[39m,
+    done: [33mtrue[39m
+  },
+  {
+    _id: ObjectId([32m'66a57106f660a20b5a149f49'[39m),
+    text: [32m'Learn about containers'[39m,
+    done: [33mfalse[39m
+  }
+]
+[1G[0Jthe_database> [15Gd.[1G[0Jthe_database> d[16Gb.todos.insertOne({
+[1G[0J... [5Gtext: [32m'[39m[32mI[39m[32mn[39m[32mc[39m[32mr[39m[32me[39m[32ma[39m[32ms[39m[32me[39m [32mt[39m[32mh[39m[32me[39m [32mn[39m[32mu[39m[32mm[39m[32mb[39m[32me[39m[32mr[39m [32mo[39m[32mf[39m [32mt[39m[32mo[39m[32mo[39m[32ml[39m[32ms[39m [32mi[39m[32mn[39m [32mm[39m[32my[39m [32mt[39m[32mo[39m[32mo[39m[32ml[39m [32mb[39m[32me[39m[32ml[39m[32mt[39m[32m'[39m,
+[1G[0J... [5Gd[36mdo[39mdone: fals[33mfalse[39m
+[1G[0J... [5G})
+{
+  acknowledged: [33mtrue[39m,
+  insertedId: ObjectId([32m'66a57164fcff4dfa58149f48'[39m)
+}
+[1G[0Jthe_database> [15Gdb.todos.findO[1G[0Jthe_database> db.todos.find[28G({})
+[
+  {
+    _id: ObjectId([32m'66a57106f660a20b5a149f48'[39m),
+    text: [32m'Write code'[39m,
+    done: [33mtrue[39m
+  },
+  {
+    _id: ObjectId([32m'66a57106f660a20b5a149f49'[39m),
+    text: [32m'Learn about containers'[39m,
+    done: [33mfalse[39m
+  },
+  {
+    _id: ObjectId([32m'66a57164fcff4dfa58149f48'[39m),
+    text: [32m'Increase the number of tools in my tool belt'[39m,
+    done: [33mfalse[39m
+  }
+]
+[1G[0Jthe_database> [15G
+[?2004hroot@b56d132ad68c:/# [?2004l
+exit
+[1m
+What's next?
+[0m  Try Docker Debug for seamless, persistent debugging tools in any container or image → [36mdocker debug todo-backend-mongo-1[0m
+  Learn more at https://docs.docker.com/go/debug-cli/
+[1m[7m%[27m[1m[0m                                                                                                                                                  ]2;teerth@teerthlaptop0:~/projects/UHelsinkiFullStack2022/Part12/part12-containers-applications/todo-app/todo-backend]1;../todo-backend]7;file://teerthlaptop0/home/teerth/projects/UHelsinkiFullStack2022/Part12/part12-containers-applications/todo-app/todo-backend\[0m[27m[24m[J[0m[49m[39m[0m[47m[38;5;232m [0m[38;5;232m[47m[47m[38;5;232m [0m[38;5;232m[47m[44m[37m[0m[37m[44m[44m[38;5;254m  [1m[38;5;254m[44m[38;5;255m~[0m[38;5;255m[44m[44m[38;5;254m/[38;5;250mp[0m[38;5;250m[44m[44m[38;5;254m/[1m[38;5;254m[44m[38;5;255mUHelsinkiFullStack2022[0m[38;5;255m[44m[44m[38;5;254m/Part12/[38;5;250mp[0m[38;5;250m[44m[44m[38;5;254m/[38;5;250mt[0m[38;5;250m[44m[44m[38;5;254m/[1m[38;5;254m[44m[38;5;255mtodo-backend[0m[38;5;255m[44m[44m[38;5;254m[0m[38;5;254m[44m[44m[38;5;254m [0m[38;5;254m[44m[42m[34m[0m[34m[42m[42m[30m  [30m main[0m[30m[42m[42m[30m [0m[30m[42m[49m[32m[0m[32m[49m[39m [0m[49m[39m[K[37C[0m[49m[30m[0m[30m[40m[32m [0m[32m[40m[40m[32m✔[0m[32m[40m[40m[32m [0m[32m[40m[40m[32m[33m[0m[33m[40m[43m[30m 1m 28s[0m[30m[43m[43m[30m [0m[30m[43m[43m[30m [0m[30m[43m[43m[30m[34m[0m[34m[43m[44m[30m base[0m[30m[44m[44m[30m [0m[30m[44m[44m[30m [0m[30m[44m[44m[30m[37m[0m[37m[44m[47m[30m 17:15:09[0m[30m[47m[47m[30m [0m[30m[47m[47m[30m [0m[30m[47m[49m[39m[74D[?1h=[?2004hccurl "http://lc ocalhost:300/ 0/todos"[?1l>[?25l[?2004l[0m[27m[24m[J[0m[49m[27m[24m[38;5;76m❯[0m[38;5;76m[49m[39m[27m[24m curl "http://localhost:3000/todos"[K[?25h
+]2;curl "http://localhost:3000/todos"]1;curl[{"_id":"66a57106f660a20b5a149f48","text":"Write code","done":true},{"_id":"66a57106f660a20b5a149f49","text":"Learn about containers","done":false},{"_id":"66a57164fcff4dfa58149f48","text":"Increase the number of tools in my tool belt","done":false}][1m[7m%[27m[1m[0m                                                                                                                                                  ]2;teerth@teerthlaptop0:~/projects/UHelsinkiFullStack2022/Part12/part12-containers-applications/todo-app/todo-backend]1;../todo-backend]7;file://teerthlaptop0/home/teerth/projects/UHelsinkiFullStack2022/Part12/part12-containers-applications/todo-app/todo-backend\[0m[27m[24m[J[0m[49m[39m[0m[47m[38;5;232m [0m[38;5;232m[47m[47m[38;5;232m [0m[38;5;232m[47m[44m[37m[0m[37m[44m[44m[38;5;254m  [1m[38;5;254m[44m[38;5;255m~[0m[38;5;255m[44m[44m[38;5;254m/[38;5;250mp[0m[38;5;250m[44m[44m[38;5;254m/[1m[38;5;254m[44m[38;5;255mUHelsinkiFullStack2022[0m[38;5;255m[44m[44m[38;5;254m/Part12/[38;5;250mp[0m[38;5;250m[44m[44m[38;5;254m/[38;5;250mt[0m[38;5;250m[44m[44m[38;5;254m/[1m[38;5;254m[44m[38;5;255mtodo-backend[0m[38;5;255m[44m[44m[38;5;254m[0m[38;5;254m[44m[44m[38;5;254m [0m[38;5;254m[44m[42m[34m[0m[34m[42m[42m[30m  [30m main[0m[30m[42m[42m[30m [0m[30m[42m[49m[32m[0m[32m[49m[39m [0m[49m[39m[K[48C[0m[49m[30m[0m[30m[40m[32m [0m[32m[40m[40m[32m✔[0m[32m[40m[40m[32m [0m[32m[40m[40m[32m[34m[0m[34m[40m[44m[30m base[0m[30m[44m[44m[30m [0m[30m[44m[44m[30m [0m[30m[44m[44m[30m[37m[0m[37m[44m[47m[30m 17:15:28[0m[30m[47m[47m[30m [0m[30m[47m[47m[30m [0m[30m[47m[49m[39m[74D[?1h=[?2004h[?2004l
+
+Script done on 2024-07-27 17:15:32-05:00 [COMMAND_EXIT_CODE="0"]

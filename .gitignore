@@ -107,3 +107,5 @@ tags
 tags.temp
 tags.lock
 
+# redis data
+redis_data
