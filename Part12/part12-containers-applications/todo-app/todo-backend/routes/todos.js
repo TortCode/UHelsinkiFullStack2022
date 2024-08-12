@@ -47,7 +47,7 @@ singleRouter.put('/', async (req, res) => {
     runValidators: true,
     new: true
   }
-  const newTodo = await Todo.findByIdAndUpdate(req.params.id, req.body, opts)
+  const newTodo = await Todo.findByIdAndUpdate(req.todo._id, req.body, opts)
   if (!newTodo) {
     res.sendStatus(404)
     return
