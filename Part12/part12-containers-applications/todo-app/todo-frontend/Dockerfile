@@ -6,7 +6,7 @@ RUN npm ci
 
 RUN npm run test
 
-ENV VITE_BACKEND_URL=http://localhost:3000
+ENV VITE_BACKEND_URL=http://localhost:8080/api/
 RUN npm run build
 
 FROM nginx:1.25-alpine
