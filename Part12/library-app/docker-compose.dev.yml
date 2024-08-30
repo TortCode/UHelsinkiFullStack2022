@@ -1,0 +1,41 @@
+services:
+  nginx:
+    image: nginx:1.20.1
+    container_name: library-reverse-proxy-dev
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    depends_on:
+      - library-frontend
+      - library-backend
+  library-frontend:
+    image: library-frontend-dev
+    container_name: library-frontend-dev
+    build:
+      context: ./library-frontend
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./library-frontend:/usr/src/app
+  library-backend:
+    image: library-backend-dev
+    container_name: library-backend-dev
+    build:
+      context: ./library-backend
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./library-backend:/usr/src/app
+    environment:
+      MONGO_URL: mongodb://teerth:ezpassword@mongo:27017/librarydb
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: insecure_root_password
+      MONGO_INITDB_DATABASE: librarydb
+    volumes:
+      - ./library-backend/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - library_data:/data/db
+
+volumes:
+  library_data:
