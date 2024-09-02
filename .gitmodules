@@ -1,0 +1,3 @@
+[submodule "Part11/full-stack-open-pokedex"]
+	path = Part11/full-stack-open-pokedex
+	url = git@github.com:TortCode/full-stack-open-pokedex.git
