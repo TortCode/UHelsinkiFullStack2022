@@ -35,3 +35,7 @@
 - Part 8: GraphQL
   - Apollo
 - Part 9: TypeScript
+- Part 12: Containers
+  - Docker
+  - Docker Compose
+  - Nginx
